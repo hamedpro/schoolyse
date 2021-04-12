@@ -24,12 +24,10 @@ function compareTwoObject(firstObject,secondObject){
 }
 
 function countDuplicates(array){
-    // make sure about this part : checking if a index exist or not
     let result = {}
     array.forEach(element => {
         if(
-            result[element] == null ||
-            result[element] == "undefined"
+            !result[element]
         ){
             result[element] = 1
         }else{
@@ -38,85 +36,87 @@ function countDuplicates(array){
     });
     return result;
 }
-limits = {
-    shimi:2,
-    riazi:3,
-    hendese:4
-}
+
 class ring{
-    duration;
-    value;
-    constructor(value){
-        this.value = value;
-    }
-    checkResists(){
-        
-    }
+   value;
+   duration_as_minute;
 }
 class day{
-    rings;
-    ringsCount;
-    constructor(ringsCount){
-        this.ringsCount = ringsCount;
-    }
-    checkResists(){
-        
-    }
+    name;
+    rings =[];
 }
-class classRoom{
-    days;
-    ringsAsArray;
-    updateComputedVars(){
-        this.days.forEach(day => {
-            day.rings.forEach(ring=>{
-                this.ringsAsArray.push(ring.value)
-            })
-        });
-    }
-    className;
-    constructor(){
+class class_room{
+    name;
+    days =[];   
 
-    }
-    checkResists(limits){
-       if(compareTwoObject(limits,countDuplicates(this.ringsAsArray))){
-           return true
-       }
-       console.log("not passed")
-       return false
-    }
 }
 class school{
-    classRooms;
-    checkResists(){
-        let passed;
-        
-        this.classRooms.forEach(element => {
-            if(element.checkResists()){
-                this.passed++;
-            }
-                
-        })
-
-        if (passed == this.classRooms.length){
-            return true;
-        }else{
-            return false;
-        }
+    name;
+    class_rooms =[];
+}
+function bind_analyser_to_ring(ring){
+    //accept a ring object
+}
+function bind_analyser_to_day(day){
+    //accept a ring object
+    day.data = {
+        rings_count : day.rings.count,
+        rings_info:countDuplicates(day.rings)
     }
 }
-function newSchool(
-    classRoomsCount,
-    daysCount,
-    ringsCount
-){
-    let result =new school;
-    myRange(classRoomsCount).forEach(element => {
-        result.classRooms.push(new classRoom)
-    });
-    result.classRooms.forEach(classRoom => {
-        classRoom.days.push
+function bind_analyser_to_class_room(class_room){
+    //accept a ring object
+
+    //calculate and bind all child rings to instance
+    class_room.rings = [];
+    class_room.days.forEach(day=>{
+        day.rings.forEach(ring=>{
+            class_room.rings.push(ring.value)
+        })
     })
-    myRange(daysCount).forEach(element => {
-        result.classRooms.push(element)
-    });
+    //bind rings info to instace.data
+    class_room.data = {}
+    class_room.data.rings_info = countDuplicates(class_room.rings);
 }
+
+function bind_analyser_to_school(school){
+    //bind analyser to rings
+    school.class_rooms.forEach(class_room => {
+        class_room.days.forEach(day=>{
+            day.rings.forEach(ring=>{
+                bind_analyser_to_ring(ring);
+            })
+        })
+    })
+
+    //bind analyser to days
+    school.class_rooms.forEach(class_room =>{
+        class_room.days.forEach(day => {
+            bind_analyser_to_day(day)
+        })
+    })
+
+    //bind analyser to class_rooms 
+    school.class_rooms.forEach(class_room =>{
+        bind_analyser_to_class_room(class_room)
+    })
+}
+
+let amir = new school
+
+let class_205 = new class_room
+amir.class_rooms.push(class_205)
+
+let shanbe = new day
+shanbe.rings.push(new ring)
+shanbe.rings.push(new ring)
+amir.class_rooms[0].days.push(shanbe)
+
+bind_analyser_to_school(amir)
+
+function get_plan_as_object(school){
+    return JSON.stringify(
+        school
+    ,null,1)
+}
+console.log(get_plan_as_object(amir))
