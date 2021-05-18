@@ -1,7 +1,3 @@
-from typing import AbstractSet
-from schoolyse import day
-
-
 class convertor:
     def dayNumberToDayName(self,dayNumber):
         strings = [
