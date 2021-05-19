@@ -30,17 +30,21 @@ class day:
     def analyse(self):
         for ring in self.rings:
             self.ringNames.append(ring.name)
+        for i in range(len(self.rings)):
+            self.rings[i].analyse()
         self.lessonsCount = common.countEachItem(self.ringNames)
         self.dayName = myConvertor.dayNumberToDayName(self.dayNumber)
         
 class week:
     days = []
     def analyse(self):
-        pass 
+        for i in range(len(self.days)):
+            self.days[i].analyse()
 class school:
     weeks = []
     def analyse(self):
-        pass
+        for i in range(len(self.weeks)):
+            self.weeks[i].analyse()
 
 class conditionManager:
     eachDayRingsCount = None 
