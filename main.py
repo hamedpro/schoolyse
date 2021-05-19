@@ -59,21 +59,21 @@ class conditionManager:
                 pass
 
 class ringPointer:
-    def __init__(self,d:dataCollectedFromUser):
-        self.dataCollectedFromUser = d
+    def __init__(self,d:conditionManager):
+        self.conditionManager = d
     focusedRing = [0,0,0] #3d array and is pointing to [weekIndex,dayIndex,ringIndex]
     def goToNextRing(self):
-        if self.focusedRing[2]+1 <= self.dataCollectedFromUser.eachDayRingsCount -1 :
+        if self.focusedRing[2]+1 <= self.conditionManager.eachDayRingsCount -1 :
             self.focusedRing[2] += 1
             return True
         else:
             self.focusedRing[2] = 0
-            if self.focusedRing[1]+1 <= self.dataCollectedFromUser.eachWeekDaysCount -1:
+            if self.focusedRing[1]+1 <= self.conditionManager.eachWeekDaysCount -1:
                 self.focusedRing[1] += 1
                 return True
             else:
                 self.focusedRing[1] = 0
-                if self.focusedRing[0]+1 <= self.dataCollectedFromUser.eachSchoolWeeksCount -1:
+                if self.focusedRing[0]+1 <= self.conditionManager.eachSchoolWeeksCount -1:
                     self.focusedRing[0] += 1
                     return True
                 else:
@@ -118,5 +118,25 @@ def printSchool(school):
                     printWithIndent(ring.name,3)
                 except:
                     printWithIndent("[ring name]",3)
-s = schoolBuilder(3,4,5)
-printSchool(s)
+class schoolyse:
+    ringPointer = None
+    conditionManager = None
+    school = None
+    def fillRing(self):
+        for lesson in self.conditionManager.lessons:
+            ringLoc = self.ringPointer.focusedRing()
+            school.weeks[ringLoc[0]].days[ringLoc[1]].rings[ringLoc[2]].name = lesson
+            school.analyse()
+            if self.conditionManager.verifyConditions(self.school)== True:
+                self.fillRing()
+    def startApp(self):
+        fillRing() #todo this class methods
+
+
+
+
+
+
+
+
+
