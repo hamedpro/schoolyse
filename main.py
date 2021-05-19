@@ -9,7 +9,8 @@ class convertor:
             "thursday",
             "friday"
             ]
-        return strings[dayNumber-1]  
+        return strings[dayNumber-1]
+myConvertor = convertor()
 def countEachItem(array):
     results = {}
     for i in range(len(array)):
@@ -23,25 +24,30 @@ class dataCollectedFromUser:
     eachDayRingsCount = None 
     eachWeekDaysCount = None
     eachSchoolWeeksCount = None
+    lessonCountLimit = object()
+    def analyse(self):
+        self.eachWeekRingsCount = self.eachWeekDaysCount * self.eachDayRingsCount
 
 class ring:
     durationInMinutes = 90
     def analyse(self):
         pass
 class day:
-    rings = []
-    ringNames = []
+    rings = [] # ring objects 
+    ringNames = [] # name prop of ring objects 
     dayNumber = None
     def analyse(self):
         for ring in self.rings:
             self.ringNames.append(ring.name)
         self.lessonsCount = common.countEachItem(self.ringNames)
+        self.dayName = myConvertor.dayNumberToDayName(self.dayNumber)
+        
 class week:
     days = []
     def analyse(self):
         pass 
 class school:
-    classRooms = []
+    weeks = []
     def analyse(self):
         pass
 
@@ -74,3 +80,45 @@ class ringPointer:
                     return True
                 else:
                     self.focusedRing = [0,0,0]
+def schoolBuilder(weeksCount,daysCount,ringsCount):
+    result = school()
+    d = day()
+    for i in range(ringsCount):
+        day.rings.append(ring)
+    w = week()
+    for i in range(daysCount):
+        w.days.append(d)
+    for i in range(weeksCount):
+        result.weeks.append(w)
+    return result
+
+    
+def printWithIndent(string,indentCount):
+    modifiedString = ""
+    for i in range(indentCount):
+        modifiedString += " " * 3
+    modifiedString += string
+    print(modifiedString)
+def printSchool(school):
+    try:
+        print(school.name)
+    except:
+        print("[school name]")
+        
+    for week in school.weeks:
+        try:
+            printWithIndent(week.name,1)
+        except:
+            printWithIndent("[week name]",1)
+        for day in week.days:
+            try:
+                printWithIndent(day.name,2)
+            except:
+                printWithIndent("[day name]",2)
+            for ring in day.rings:
+                try:
+                    printWithIndent(ring.name,3)
+                except:
+                    printWithIndent("[ring name]",3)
+s = schoolBuilder(3,4,5)
+printSchool(s)
