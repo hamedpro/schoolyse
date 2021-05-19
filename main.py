@@ -19,17 +19,8 @@ def countEachItem(array):
         else:
             results[array[i]] = 1
     return results
-
-class dataCollectedFromUser:
-    eachDayRingsCount = None 
-    eachWeekDaysCount = None
-    eachSchoolWeeksCount = None
-    lessonCountLimit = object()
-    def analyse(self):
-        self.eachWeekRingsCount = self.eachWeekDaysCount * self.eachDayRingsCount
-
 class ring:
-    durationInMinutes = 90
+    duration = 90
     def analyse(self):
         pass
 class day:
@@ -51,9 +42,16 @@ class school:
     def analyse(self):
         pass
 
-class conditions:
-    conditionCodes = []
-    def verifyConditions(school):
+class conditionManager:
+    eachDayRingsCount = None 
+    eachWeekDaysCount = None
+    eachSchoolWeeksCount = None
+    lessonCountLimit = object()
+    conditionToVerify = [] #it holds condition codes
+    def analyse(self):
+        #update computed props
+        pass 
+    def verifyConditions(self,school):
         for conditionCode in self.conditionCodes:
             if conditionCode == 1:
                 pass
