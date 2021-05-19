@@ -1,4 +1,4 @@
-class classRoom:
+class week:
     def __init__(self,conditionsObject):
         self.conditionsObject = conditionsObject
     days = []

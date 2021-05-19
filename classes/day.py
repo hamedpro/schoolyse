@@ -3,8 +3,7 @@ class day:
         self.conditionsObject = conditionsObject
     rings = []
     dayNumber = 0
-    def computed(self):
-        computed = {}
-        computed['fillRings'] = this.rings.count
-        computed['emptyRings'] = self.conditionsObject.ringsConditions.rignsPerDay - this.rings.count
-        return computed
+    def analysedData(self):
+        ad = object()
+        ad.eachLessonCount = object()
+        
